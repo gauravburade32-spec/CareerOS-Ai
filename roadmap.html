@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Roadmap – CareerOS AI</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>(function(){try{if(localStorage.getItem('careeros_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+</head>
+<body class="dashboard-app">
+  <aside class="dashboard-sidebar">
+    <a href="index.html" class="sidebar-logo">CareerOS AI</a>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="sidebar-item">
+        <span class="sidebar-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span>
+        Dashboard
+      </a>
+      <a href="skill.html" class="sidebar-item">
+        <span class="sidebar-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span>
+        Skill Assessment
+      </a>
+      <a href="career.html" class="sidebar-item">
+        <span class="sidebar-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></span>
+        Career Match
+      </a>
+      <a href="gap.html" class="sidebar-item">
+        <span class="sidebar-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
+        Skill Gap
+      </a>
+      <a href="roadmap.html" class="sidebar-item is-active">
+        <span class="sidebar-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 17l5-5 4 4 7-7"/><path d="M21 12v6H3V6"/></svg></span>
+        Roadmap
+      </a>
+      <a href="resume.html" class="sidebar-item">
+        <span class="sidebar-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></span>
+        Resume Analyzer
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" class="sidebar-item sidebar-item--logout" id="logout-btn">
+        <span class="sidebar-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span>
+        Logout
+      </a>
+    </div>
+  </aside>
+
+  <div class="dashboard-wrap">
+    <header class="dashboard-header">
+      <h1 class="dashboard-title">Personalized Career Roadmap</h1>
+      <div class="dashboard-header-right">
+        <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode">
+          <span class="icon-moon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+          <span class="icon-sun"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+        </button>
+        <span class="dashboard-user-badge" id="user-name"></span>
+      </div>
+    </header>
+
+    <main class="dashboard-content">
+      <div class="roadmap-layout">
+        <div class="assessment-card roadmap-form-card">
+          <h2 class="assessment-card__title">Choose your target career</h2>
+          <form id="roadmap-form" class="assessment-form">
+            <div class="form-group">
+              <label for="target-career">Target career</label>
+              <select id="target-career" name="targetCareer">
+                <option value="">Select career</option>
+                <option value="Data Scientist">Data Scientist</option>
+                <option value="Software Engineer">Software Engineer</option>
+                <option value="Frontend Developer">Frontend Developer</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary assessment-submit">Generate roadmap</button>
+          </form>
+        </div>
+
+        <div class="roadmap-results" id="roadmap-results" hidden>
+          <h2 class="roadmap-results-title" id="roadmap-career-title">—</h2>
+          <p class="roadmap-results-subtitle">4-month personalized plan</p>
+          <div class="timeline" id="timeline"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="theme.js"></script>
+  <script>
+    (function () {
+      var userName = document.getElementById('user-name');
+      if (userName) userName.textContent = 'Demo User';
+      var logoutBtn = document.getElementById('logout-btn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          window.location.href = 'index.html';
+        });
+      }
+
+      var STORAGE_KEY = 'careeros_completed_modules';
+      function markModuleComplete(moduleId) {
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          var map = raw ? JSON.parse(raw) : {};
+          if (!map || typeof map !== 'object') map = {};
+          map[moduleId] = Date.now();
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
+        } catch (e) {}
+      }
+
+      var roadmaps = {
+        'Data Scientist': [
+          { month: 1, title: 'Month 1', content: 'Learn Python and SQL basics.' },
+          { month: 2, title: 'Month 2', content: 'Statistics and Machine Learning basics.' },
+          { month: 3, title: 'Month 3', content: 'Build 2 data projects.' },
+          { month: 4, title: 'Month 4', content: 'Interview preparation and portfolio.' }
+        ],
+        'Software Engineer': [
+          { month: 1, title: 'Month 1', content: 'DSA basics.' },
+          { month: 2, title: 'Month 2', content: 'Advanced DSA + coding practice.' },
+          { month: 3, title: 'Month 3', content: 'Build projects.' },
+          { month: 4, title: 'Month 4', content: 'Mock interviews.' }
+        ],
+        'Frontend Developer': [
+          { month: 1, title: 'Month 1', content: 'HTML, CSS and JavaScript basics.' },
+          { month: 2, title: 'Month 2', content: 'React or a framework + responsive design.' },
+          { month: 3, title: 'Month 3', content: 'Build 2 frontend projects.' },
+          { month: 4, title: 'Month 4', content: 'Portfolio and interview preparation.' }
+        ]
+      };
+
+      var form = document.getElementById('roadmap-form');
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var careerSelect = document.getElementById('target-career');
+          if (!careerSelect || !careerSelect.value || !roadmaps[careerSelect.value]) return;
+          var career = careerSelect.value;
+          var careerTitle = document.getElementById('roadmap-career-title');
+          if (careerTitle) careerTitle.textContent = career;
+          var container = document.getElementById('timeline');
+          if (container && roadmaps[career]) {
+            container.innerHTML = '';
+            roadmaps[career].forEach(function (step) {
+              var item = document.createElement('div');
+              item.className = 'timeline-item';
+              item.innerHTML =
+                '<div class="timeline-marker"></div>' +
+                '<div class="timeline-card">' +
+                  '<span class="timeline-card__month">' + step.title + '</span>' +
+                  '<p class="timeline-card__content">' + escapeHtml(step.content) + '</p>' +
+                '</div>';
+              container.appendChild(item);
+            });
+          }
+          var results = document.getElementById('roadmap-results');
+          if (results) {
+            results.hidden = false;
+            results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+          markModuleComplete('roadmap');
+        });
+      }
+
+      function escapeHtml(text) {
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+    })();
+  </script>
+</body>
+</html>
